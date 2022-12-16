@@ -1,6 +1,9 @@
+const { faker } = require('@faker-js/faker');
 const express = require('express');
+
 const app = express();
 const bodyParser = require('body-parser');
+
 app.get('/random-users', (req, res) => {
     fetch('https://randomuser.me/api?results=10')
         .then(response => response.json())
@@ -55,6 +58,21 @@ app.delete('/users/:id', (req, res) => {
     // return a message indicating that the user was deleted
     res.send(`User with id ${id} deleted`);
 });
+
+function fetchRandomUsers() {
+    const numUsers = Math.floor(Math.random() * 10) + 1;
+    const users = [];
+    for (let i = 0; i < numUsers; i++) {
+        const user = {
+            id: faker.datatype.uuid(),
+            name: faker.internet.userName(),
+            email: faker.internet.email(),
+            avatar: faker.image.avatar()
+        };
+        users.push(user);
+    }
+    return users;
+}
 
 // start the server
 app.listen(3000, () => {
