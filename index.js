@@ -41,7 +41,7 @@ app.get('/users', (req, res) => {
     const mixedUsers = [...users, ...fetchRandomUsers()];
 
     // return the mixed users
-    res.json(mixedUsers);
+    res.json({user: mixedUsers});
 });
 
 // DELETE /users
