@@ -8,3 +8,4 @@
 /dataSources.local.xml
 # CodeStream ignored files
 /../../js-test-app\.idea/codestream.xml
+/node_modules/
