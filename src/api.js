@@ -19,11 +19,14 @@ app.use(bodyParser.json());
 
 let users = [];
 router.get('/random-users', (req, res) => {
-    fetch('https://randomuser.me/api?results=10')
-        .then(response => response.json())
-        .then(data => {
-            res.json(data);
-        });
+    // fetch('https://randomuser.me/api?results=10')
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         res.json(data);
+    //     });
+    res.json({
+        hello: "hi, random!"
+    });
 });
 
 
@@ -31,3 +34,8 @@ app.use(`/.netlify/functions/api`, router);
 
 module.exports = app;
 module.exports.handler = serverless(app);
+
+// start the server
+app.listen(3000, () => {
+    console.log('Server listening on port 3000');
+});
