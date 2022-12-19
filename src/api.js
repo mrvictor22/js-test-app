@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const serverless = require("serverless-http");
 const app = express();
 const router = express.Router();
-
+const axios = require('axios');
 router.get("/", (req, res) => {
     res.json({
         hello: "hi!"
@@ -18,23 +18,25 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 let users = [];
-const xhr = new XMLHttpRequest();
-xhr.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-        // Get the response data
-        const response = JSON.parse(this.responseText);
-        // Access the values from the response object
-        const values = response.results;
-        console.log(values);
-    }
-};
-xhr.open("GET", "https://randomuser.me/api?results=10", true);
-xhr.send();
+
+
 router.get('/random-users', (req, res) => {
 
-    res.json({
-        data: values
-    });
+
+    axios.get('https://randomuser.me/api?results=10')
+        .then(response => {
+            // Access the values from the response object
+            const values = response.data.results;
+            console.log(values);
+            res.json({
+                data: values
+            });
+        })
+        .catch(error => {
+            console.log(error);
+        });
+
+
 });
 
 
