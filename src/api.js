@@ -1,4 +1,5 @@
-const fetch = require('node-fetch');
+import fetch from 'node-fetch'
+globalThis.fetch = fetch
 const express = require("express");
 const { faker } = require('@faker-js/faker');
 const bodyParser = require('body-parser');
