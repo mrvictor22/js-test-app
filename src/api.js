@@ -1,3 +1,4 @@
+import fetch from "node-fetch";
 const express = require("express");
 const { faker } = require('@faker-js/faker');
 const bodyParser = require('body-parser');
