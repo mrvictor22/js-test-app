@@ -12,7 +12,7 @@ router.get("/", (req, res) => {
     });
 });
 
-app.get('/random-users', (req, res) => {
+router.get('/random-users', (req, res) => {
     fetch('https://randomuser.me/api?results=10')
         .then(response => response.json())
         .then(data => {
