@@ -3,7 +3,8 @@ const { faker } = require('@faker-js/faker');
 const bodyParser = require('body-parser');
 const serverless = require("serverless-http");
 const app = express();
-const router = express.Router();
+const router = express.Router()
+const cors = require("cors");;
 const axios = require('axios');
 router.get("/", (req, res) => {
     res.json({
