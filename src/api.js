@@ -64,17 +64,6 @@ router.delete('/users/:id', (req, res) => {
     // get the id of the user to delete from the request parameters
     const id = req.params.id;
 
-    // find the index of the user in the users array
-    const index = users.findIndex(user => user.id === id);
-
-    // remove the user from the array
-    users.splice(index, 1);
-
-    // return a message indicating that the user was deleted
-    res.send(`User with id ${id} deleted`);
-});
-
-
 function fetchRandomUsers() {
     const numUsers = Math.floor(Math.random() * 10) + 1;
     const users = [];
