@@ -19,24 +19,25 @@ app.use(bodyParser.json());
 
 let users = [];
 
-var dt = axios.get('https://randomuser.me/api?results=10')
-    .then(response => {
-        // Access the values from the response object
-        const values = response.data.results;
-        console.log(values);
-        res.json({
-            data: values
+function generateUsers() {
+    axios.get('https://randomuser.me/api?results=10')
+        .then(response => {
+            // Access the values from the response object
+            const values = response.data.results;
+            console.log(values);
+            return values;
+        })
+        .catch(error => {
+            console.log(error);
         });
-    })
-    .catch(error => {
-        console.log(error);
-    });
+}
+
 
 router.get('/random-users', (req, res) => {
 
 
     res.json({
-        data: dt
+        data: generateUsers()
     });
 
 
