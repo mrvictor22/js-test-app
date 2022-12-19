@@ -19,15 +19,22 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 let users = [];
-const dt = fetch('https://randomuser.me/api?results=10')
-    .then(response => response.json())
-    .then(data => {
-        res.json(data);
-    });
-router.get('/random-users', (req, res) => {
 
+router.get('/random-users', (req, res) => {
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            // Get the response data
+            const response = JSON.parse(this.responseText);
+            // Access the values from the response object
+            const values = response.results;
+            console.log(values);
+        }
+    };
+    xhr.open("GET", "https://randomuser.me/api?results=10", true);
+    xhr.send();
     res.json({
-        data: dt
+        data: values
     });
 });
 
