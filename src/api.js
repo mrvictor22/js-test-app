@@ -1,23 +1,36 @@
 const express = require("express");
 const { faker } = require('@faker-js/faker');
-const serverless = require("serverless-http");
 const bodyParser = require('body-parser');
 const serverless = require("serverless-http");
 const app = express();
 const router = express.Router();
-
+const axios = require('axios');
 router.get("/", (req, res) => {
     res.json({
         hello: "hi!"
     });
 });
 
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// parse application/json
+app.use(bodyParser.json());
+
+let users = [];
+
 router.get('/random-users', (req, res) => {
-    fetch('https://randomuser.me/api?results=10')
-        .then(response => response.json())
-        .then(data => {
-            res.send(data);
+
+
+    axios.get('https://randomuser.me/api?results=10')
+        .then(function (response) {
+            res.send(response.data.results);
+        })
+        .catch(function (error) {
+            console.log(error);
         });
+
+
 });
 
 
@@ -25,3 +38,8 @@ app.use(`/.netlify/functions/api`, router);
 
 module.exports = app;
 module.exports.handler = serverless(app);
+
+// start the server
+app.listen(3000, () => {
+    console.log('Server listening on port 3000');
+});
