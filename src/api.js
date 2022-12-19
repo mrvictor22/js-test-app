@@ -11,6 +11,13 @@ router.get("/", (req, res) => {
     });
 });
 
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// parse application/json
+app.use(bodyParser.json());
+
+let users = [];
 router.get('/random-users', (req, res) => {
     fetch('https://randomuser.me/api?results=10')
         .then(response => response.json())
