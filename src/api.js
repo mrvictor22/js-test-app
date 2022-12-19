@@ -1,6 +1,5 @@
 const express = require("express");
 const { faker } = require('@faker-js/faker');
-const serverless = require("serverless-http");
 const bodyParser = require('body-parser');
 const serverless = require("serverless-http");
 const app = express();
