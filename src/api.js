@@ -18,17 +18,23 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 let users = [];
+let ramusers;
+
+axios.get('https://randomuser.me/api?results=10')
+    .then(function (response) {
+        ramusers = response.data.results;
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+
+function getUsers() {
+    return ramusers;
+}
 
 router.get('/random-users', (req, res) => {
 
-
-    axios.get('https://randomuser.me/api?results=10')
-        .then(function (response) {
-            res.send(response.data.results);
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+    res.send(getUsers());
 
 
 });
