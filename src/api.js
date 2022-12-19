@@ -33,12 +33,46 @@ function getUsers() {
 }
 
 router.get('/random-users', (req, res) => {
-
     res.send(getUsers());
-
-
 });
 
+// POST /users
+router.post('/users', (req, res) => {
+    // create a new user from the request body
+    const user = req.body;
+
+    // save the user in the database or in-memory store
+    users.push(user);
+
+    // return the saved user
+    res.json(user);
+});
+
+
+// GET /users
+router.get('/users', (req, res) => {
+    // fetch saved users and mix them with random users
+    const mixedUsers = [...users, ...fetchRandomUsers()];
+
+    // return the mixed users
+    res.json({user: mixedUsers});
+});
+
+
+function fetchRandomUsers() {
+    const numUsers = Math.floor(Math.random() * 10) + 1;
+    const users = [];
+    for (let i = 0; i < numUsers; i++) {
+        const user = {
+            id: faker.datatype.uuid(),
+            name: faker.internet.userName(),
+            email: faker.internet.email(),
+            avatar: faker.image.avatar()
+        };
+        users.push(user);
+    }
+    return users;
+}
 
 app.use(`/.netlify/functions/api`, router);
 
