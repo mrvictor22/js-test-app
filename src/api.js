@@ -19,14 +19,14 @@ app.use(bodyParser.json());
 
 let users = [];
 router.get('/random-users', (req, res) => {
-    var dt = fetch('https://randomuser.me/api?results=10')
+    fetch('https://randomuser.me/api?results=10')
         .then(response => response.json())
         .then(data => {
-            res.json(data);
+            console.log(data);
         });
-    res.json({
-        data: dt
-    });
+    // res.json({
+    //     data: dt
+    // });
 });
 
 
