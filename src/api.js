@@ -32,6 +32,18 @@ function generateUsers() {
         });
 }
 
+router.get('/values', (req, res) => {
+    axios.get('https://randomuser.me/api?results=10')
+        .then(response => {
+            // Access the values from the response object
+            const values = response.data.results;
+            res.send(values);
+        })
+        .catch(error => {
+            res.send(error);
+        });
+});
+
 
 router.get('/random-users', (req, res) => {
 
