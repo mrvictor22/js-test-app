@@ -3,7 +3,8 @@ const express = require('express');
 
 const app = express();
 const bodyParser = require('body-parser');
-
+const serverless = require("serverless-http");
+const router = express.Router();
 app.get('/random-users', (req, res) => {
     fetch('https://randomuser.me/api?results=10')
         .then(response => response.json())
@@ -74,7 +75,18 @@ function fetchRandomUsers() {
     return users;
 }
 
+
+router.get("/", (req, res) => {
+    res.json({
+        hello: "hi!"
+    });
+});
+
 // start the server
 app.listen(3000, () => {
     console.log('Server listening on port 3000');
 });
+
+app.use(`/.netlify/functions/api`, router);
+module.exports = app;
+module.exports.handler = serverless(app);
