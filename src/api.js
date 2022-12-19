@@ -1,5 +1,4 @@
-import fetch from 'node-fetch'
-globalThis.fetch = fetch
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 const express = require("express");
 const { faker } = require('@faker-js/faker');
 const bodyParser = require('body-parser');
