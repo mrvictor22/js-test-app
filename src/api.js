@@ -6,7 +6,6 @@ const app = express();
 const router = express.Router()
 const cors = require("cors");;
 const axios = require('axios');
-debugger;
 router.get("/", (req, res) => {
     res.json({
         hello: "hi!"
