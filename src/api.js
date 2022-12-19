@@ -22,7 +22,7 @@ router.get('/random-users', (req, res) => {
     fetch('https://randomuser.me/api?results=10')
         .then(response => response.json())
         .then(data => {
-            res.send(data);
+            res.json(data);
         });
 });
 
